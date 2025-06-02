@@ -1,146 +1,150 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>水崛頭市場特色導覽地圖</title>
+  <title>水崛頭市場導覽｜活動推廣頁</title>
   <style>
     body {
       font-family: "Noto Sans TC", sans-serif;
+      background: #fffaf4;
       margin: 0;
       padding: 0;
-      background-color: #fffdf8;
+      color: #333;
     }
     header {
-      background-color: #ff914d;
-      padding: 1.5em;
+      background: linear-gradient(90deg, #ffa07a, #ffcc70);
+      padding: 2em 1em 1em;
       text-align: center;
       color: white;
-      font-size: 2em;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.4em;
       letter-spacing: 2px;
     }
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 1em;
-      margin: 1.5em;
+    nav {
+      margin-top: 1em;
     }
-    .controls input, .controls select {
-      padding: 0.6em;
+    nav a {
+      color: white;
+      margin: 0 1em;
+      text-decoration: underline;
       font-size: 1em;
-      border-radius: 8px;
-      border: 1px solid #ccc;
     }
-    .map-container {
-      overflow-x: auto;
-      padding: 1em;
-      background-color: #fff3e0;
-    }
-    .map-img {
-      width: 80%;
-      max-width: 800px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      border: 4px solid #ffa07a;
-      border-radius: 16px;
-    }
-    .shops {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 2em;
-      padding: 2em;
-    }
-    .shop {
-      border: 1px solid #f2d0a7;
-      border-radius: 16px;
-      padding: 1em;
-      background-color: #fffaf4;
-      box-shadow: 3px 3px 12px rgba(0,0,0,0.08);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .shop:hover {
-      transform: scale(1.05);
-      box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
-    }
-    .shop img {
+    .banner {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
+      max-width: 960px;
+      margin: 1em auto;
+      display: block;
       border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .shop h3 {
-      margin: 0.5em 0;
-      color: #333;
-      font-size: 1.2em;
+    section {
+      max-width: 960px;
+      margin: 2em auto;
+      padding: 0 1em;
     }
-    .shop p {
-      font-size: 0.9em;
-      color: #555;
+    h2 {
+      color: #ff914d;
+      border-left: 6px solid #ffcc70;
+      padding-left: 0.5em;
+      margin-top: 2em;
     }
-    .shop a {
-      display: inline-block;
-      margin-top: 0.8em;
-      color: #007f73;
-      text-decoration: none;
+    .highlight {
       font-weight: bold;
+      color: #d94f00;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5em;
+      margin-top: 1.5em;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      padding: 1em;
+      text-align: center;
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+      height: 140px;
+      object-fit: cover;
+    }
+    .card p {
+      margin-top: 0.5em;
+    }
+    .illustration {
+      width: 100%;
+      max-width: 800px;
+      margin: 2em auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #999;
+      margin: 3em 0 2em;
+    }
+    .qr {
+      display: block;
+      max-width: 220px;
+      margin: 1.5em auto;
     }
   </style>
 </head>
 <body>
-  <header>水崛頭市場特色導覽地圖</header>
-  <div class="controls">
-    <input type="text" id="searchBox" placeholder="搜尋店家名稱...">
-    <select id="categoryFilter">
-      <option value="">全部類別</option>
-      <option value="小吃">小吃</option>
-      <option value="生鮮">生鮮</option>
-      <option value="雜貨">雜貨</option>
-      <option value="餐飲">餐飲</option>
-    </select>
-  </div>
-  <div class="map-container">
-    <img class="map-img" src="images/your-handdrawn-map.jpg" alt="手繪地圖">
-  </div>
-  <section class="shops" id="shopList"></section>
-  <script>
-    const shops = [
-      ["紅心地瓜球", "683ce91bc7092", "小吃"], ["服飾店", "683ceca05cc3c", "雜貨"],
-      ["鎗興肉舖", "683ced92ebb89", "生鮮"], ["千純涼麵", "683cee1f06a49", "小吃"],
-      ["水果王", "683cee5fa0cc9", "生鮮"], ["人本堂中藥鋪", "683cf12e5d6ad", "雜貨"],
-      ["姜君綠豆湯", "683cf21c409ed", "小吃"], ["褔元豆腐", "683cf0b1044a6", "生鮮"],
-      ["冠林菇菇蔬果園", "683cf01628fb2", "生鮮"], ["社頭阿嬤芭樂", "683d2d72de154", "生鮮"],
-      ["一品油飯", "683cefd321199", "餐飲"], ["竹筍攤", "683cef4629f4d", "生鮮"],
-      ["明美烘焙坊", "683ceedf7477b", "餐飲"], ["施家班青菜大賣價", "683ceeac21f66", "生鮮"],
-      ["萬里香現炒", "683cf077154db", "餐飲"], ["南北雜貨", "683d2e2cc0172", "雜貨"],
-      ["水煮玉米", "683cf04788ab4", "小吃"], ["丹丹蔥油餅", "683d2dd58cae1", "小吃"],
-      ["老北京蔥花燒", "683d30334972d", "小吃"], ["粉粿奇冰", "683cef86b2e71", "小吃"],
-      ["小林魚鋪", "683cf1835d9a0", "生鮮"], ["富蛤專業水產", "683cef1159155", "生鮮"],
-      ["餅乾糖果", "683d2e7a70640", "雜貨"], ["糖莊滷品", "683d2d9f9c19b", "小吃"],
-      ["丸慶專業生魚片", "683cf2d27a2ee", "生鮮"]
-    ];
-    const listEl = document.getElementById("shopList");
-    const searchBox = document.getElementById("searchBox");
-    const categoryFilter = document.getElementById("categoryFilter");
-    function renderShops() {
-      const keyword = searchBox.value.trim();
-      const cat = categoryFilter.value;
-      listEl.innerHTML = shops.filter(([name, _, c]) => {
-        return (!keyword || name.includes(keyword)) && (!cat || cat === c);
-      }).map(([name, code]) => `
-        <div class="shop">
-          <img src="images/${name}.jpg" alt="${name}">
-          <h3>${name}</h3>
-          <p>歡迎來到${name}，市場人氣商家之一！</p>
-          <a href="https://qr.pro/i/${code}" target="_blank">掃碼看更多</a>
-        </div>
-      `).join("");
-    }
-    searchBox.addEventListener("input", renderShops);
-    categoryFilter.addEventListener("change", renderShops);
-    renderShops();
-  </script>
+  <header>
+    <h1>水崛頭市場 數位導覽活動頁</h1>
+    <p>永安國小資優班 114 年專題成果</p>
+    <nav>
+      <a href="index.html">首頁地圖導覽</a>
+      <a href="promo.html">活動推廣頁</a>
+    </nav>
+  </header>
+
+  <img class="banner" src="images/your-handdrawn-map.jpg" alt="水崛頭市場手繪地圖">
+
+  <section>
+    <h2>💡 我們的動機</h2>
+    <p>市場不只是購物的地方，更是人情味與在地文化的縮影。<br>
+    <span class="highlight">永安國小資優班</span>的孩子們親自走訪市場，訪問店家，製作導覽網站與手繪地圖，結合 QR Code 技術，讓大家看見傳統市場的新風貌。</p>
+    <img class="illustration" src="images/students-research.png" alt="學生田野調查插圖">
+
+    <h2>🌟 導覽網站亮點</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="images/紅心地瓜球.jpg" alt="紅心地瓜球">
+        <p>25 家人氣店家完整介紹</p>
+      </div>
+      <div class="card">
+        <img src="images/水果王.jpg" alt="水果王">
+        <p>手繪地圖 + 實景照片整合</p>
+      </div>
+      <div class="card">
+        <img src="images/qr-sample.jpg" alt="QRCode">
+        <p>每家商家都有專屬 QR Code</p>
+      </div>
+    </div>
+
+    <h2>📱 掃描立即體驗！</h2>
+    <p style="text-align: center;">
+      <img class="qr" src="images/qrcode-site.png" alt="網站 QR Code">
+      <br>或直接前往：<br>
+      <a href="https://chailanying.github.io/shueituo-market-guide" target="_blank">https://chailanying.github.io/shueituo-market-guide</a>
+    </p>
+
+    <h2>👨‍🏫 教師指導與學習成果</h2>
+    <p>本專案融合資訊科技、語文表達、地方踏查與美感設計，展現學生整合能力與社會關懷精神。</p>
+  </section>
+
+  <footer>
+    © 2024 永安國小資優班 | 製作團隊：114 資優專題課程學生
+  </footer>
 </body>
 </html>
