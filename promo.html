@@ -8,47 +8,64 @@
   <style>
     body {
       font-family: "Noto Sans TC", sans-serif;
-      background-color: #fffdf8;
+      background-color: #fefcf6;
       margin: 0;
       padding: 0;
       font-size: 18px;
       line-height: 1.8;
+      color: #444;
     }
     header {
-      background-color: #ff914d;
-      color: white;
-      text-align: center;
-      padding: 1.5em;
-      font-size: 2.5em;
-      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, #ffd9a0, #ffc48c);
+      padding: 1em;
+      gap: 1em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    header img {
+      height: 60px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #5a3b1d;
     }
     .content {
       max-width: 960px;
       margin: 2em auto;
       padding: 0 1em;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.05);
     }
     h2 {
-      color: #ff914d;
+      color: #e07a3f;
       font-size: 1.6em;
       margin-top: 1.5em;
+      border-left: 6px solid #f7ba78;
+      padding-left: 0.5em;
     }
     p, li {
       font-size: 1.1em;
     }
-    ul {
-      margin-left: 1.5em;
+    ul, ol {
+      margin-left: 2em;
     }
-    img {
+    .section-image {
       width: 100%;
       border-radius: 16px;
       margin: 1em 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .map-vertical {
       width: auto;
       height: 720px;
       max-height: 90vh;
       display: block;
-      margin: 1em auto;
+      margin: 2em auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     }
     .back-link {
       text-align: center;
@@ -57,43 +74,60 @@
     .back-link a {
       background-color: #ffa07a;
       color: white;
-      padding: 0.6em 1.2em;
+      padding: 0.6em 1.4em;
       border-radius: 8px;
       text-decoration: none;
       font-size: 1em;
     }
+    footer {
+      text-align: center;
+      padding: 2em 1em;
+      font-size: 0.9em;
+      color: #999;
+    }
   </style>
 </head>
 <body>
-  <header>水崛頭市場數位導覽推廣頁</header>
+  <header>
+    <img src="images/永安校徽_視情況使用.png" alt="校徽">
+    <h1>水崛頭市場數位導覽推廣頁</h1>
+  </header>
   <div class="content">
     <img src="images/your-handdrawn-map.jpg" alt="手繪導覽地圖封面" class="map-vertical">
 
-    <h2>🌟 製作動機與學習歷程</h2>
-    <p>我們來自永安國小的學生團隊，走入水崛頭市場，訪談商家、拍攝照片、手繪地圖，透過數位導覽網站，讓更多人認識這片充滿人情味的市場。</p>
+    <h2>🌱 製作動機與學習歷程</h2>
+    <p>來自永安國小六年級的我們，走訪市場、手繪地圖、製作網頁，這不只是資訊與社會課的整合，更是我們親手打造的在地小小地圖！</p>
+    <img src="images/students-research.png" class="section-image" alt="學生進行訪談與研究">
 
     <h2>🛠 專案功能介紹</h2>
     <ul>
-      <li>🔍 搜尋與類別篩選功能</li>
-      <li>📍 手繪地圖與店家座標連動</li>
-      <li>📱 點選店家即可開啟 QR Code 延伸介紹</li>
-      <li>🎨 美術設計風格融合童趣與在地特色</li>
+      <li>🔍 搜尋與分類篩選功能</li>
+      <li>🗺 手繪地圖導覽＋點圖查店家</li>
+      <li>📱 店家連結內嵌 QR Code 與照片</li>
     </ul>
 
-    <h2>👩‍🏫 團隊與聯絡資訊</h2>
-    <p>永安國小 六年級學生團隊<br/>指導老師：賴老師、蔡老師<br/>聯絡信箱：school@example.edu.tw</p>
+    <h2>📸 掃描導覽快速入口</h2>
+    <img src="images/QR CODE ALL.jpg" class="section-image" alt="QR Code 總覽">
 
-    <h2>💡 GitHub Pages 使用教學</h2>
+    <h2>👩‍🏫 團隊與聯絡資訊</h2>
+    <p>
+      製作團隊｜永安國小 六年級學生團隊<br/>
+      指導老師｜賴老師、蔡老師<br/>
+      聯絡方式｜school@example.edu.tw
+    </p>
+
+    <h2>🌍 GitHub Pages 使用教學</h2>
     <ol>
       <li>登入 GitHub，建立新 repo</li>
-      <li>上傳 index.html、promo.html、images 資料夾</li>
-      <li>到 Settings → Pages → Source 選擇 main branch</li>
-      <li>等待系統部署，開啟專屬網址</li>
+      <li>上傳 index.html、promo.html 與 images/</li>
+      <li>開啟 Settings → Pages → 選擇 main branch</li>
+      <li>稍待片刻，即可產出您的導覽網址</li>
     </ol>
 
     <div class="back-link">
-      <a href="index.html">回到互動導覽地圖</a>
+      <a href="index.html">📍 返回互動導覽地圖</a>
     </div>
   </div>
+  <footer>由永安國小學生團隊製作 · 感謝市場商家協助採訪 · 版權所有</footer>
 </body>
 </html>
